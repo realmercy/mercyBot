@@ -11,17 +11,19 @@
     "node": "^16.13.2"
   },
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/realmercy/mercyBot.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/realmercy/mercyBot/issues"
-  },
-  "homepage": "https://github.com/realmercy/mercyBot#readme"
+  }, 
+"keywords": [], 
+"author": "", 
+"license": "ISC", 
+"bugs": { 
+"url": 
+"https://github.com/realmercy/mercyBot/issues" 
+}, 
+"homepage": "https://github.com/realmercy/mercyBot#readme"
 }
