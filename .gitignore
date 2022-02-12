@@ -105,3 +105,5 @@ dist
 
 # replit
 .replit
+.config/
+replit.nix
