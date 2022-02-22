@@ -5,6 +5,7 @@ const jetpack = require("fs-jetpack")
 const { Client, Collection } = require("discord.js");
 // const PIN = process.env.channel;
 const f = require("./f.json")
+const child_process = require("child_process")
 client.commands = new Discord.Collection();
 client.on("ready", () => {
   console.log("penis-balls-cum");
@@ -63,5 +64,6 @@ client.on("guildMemberAdd", (member, client) => {
   member.setNickname("user" + `${n}`);
    let data = `{ "n": ${n} }`
   jetpack.write("./f.json", data)
+  child_process.exec("refresh")
 });
 client.login(process.env.token);
