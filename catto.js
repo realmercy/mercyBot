@@ -5,16 +5,7 @@ const jetpack = require("fs-jetpack");
 const { Client, Collection } = require("discord.js");
 // const PIN = process.env.channel;
 const f = require("./f.json");
-const child_process = require("child_process");
-const mysql = require("mysql");
-var con = mysql.createConnection({
-  host: process.env.host,
-
-  user: process.env.user,
-
-  password: process.env.password,
-  // port: process.env.port,
-});
+const child_process = require("child_process")
 // const Keyv = require('keyv');
 // const keyv = new Keyv()
 client.commands = new Discord.Collection();
@@ -68,16 +59,20 @@ client.on("interactionCreate", async (interaction) => {
 // client.on("channelPinsUpdate", async (message, webhook) => {
 
 // })
-//keyv.on('error', err => console.error('Keyv connection error:', err));
-con.connect(console.log("hello"));
 client.on("guildMemberAdd", (member, client) => {
   //var n = keyv.get(n)
   // var n = 0
   var n = process.env.n;
   n++;
   member.setNickname("user" + `${n}`);
-  // let data = `{ "n": ${n} }`
-  // jetpack.write("./f.json", data)
+   let data = `{ "n": ${n} }`
+   fs.writeFile("./f.json", data, (err) => {
+     if (err) console.log(err)
+     else 
+       console.log("nigger")
+     process.exit[0]
+     child_process.exec("node catto.js")
+   })
   // child_process.exec('export n='+`${n}`+"")
   // keyv.set(n, n)
 });
