@@ -3,11 +3,17 @@ const client = new Discord.Client({ intents: 4871 });
 const fs = require("fs");
 const jetpack = require("fs-jetpack");
 const { Client, Collection } = require("discord.js");
-// const PIN = process.env.channel;
 const f = require("./f.json");
-const child_process = require("child_process")
-// const Keyv = require('keyv');
-// const keyv = new Keyv()
+const child_process = require("child_process");
+const pg = require("pg");
+const base = new pg.Client({
+  user: process.env.user,
+  host: process.env.host,
+  database: process.env.database,
+  password: process.env.password,
+  port: process.env.port,
+});
+
 client.commands = new Discord.Collection();
 client.on("ready", () => {
   console.log("penis-balls-cum");
@@ -60,20 +66,30 @@ client.on("interactionCreate", async (interaction) => {
 
 // })
 client.on("guildMemberAdd", (member, client) => {
-  //var n = keyv.get(n)
-  // var n = 0
-  var n = process.env.n;
-  n++;
-  member.setNickname("user" + `${n}`);
-   let data = `{ "n": ${n} }`
-   fs.writeFile("./f.json", data, (err) => {
-     if (err) console.log(err)
-     else 
-       console.log("nigger")
-     process.exit[0]
-     child_process.exec("node catto.js")
-   })
-  // child_process.exec('export n='+`${n}`+"")
-  // keyv.set(n, n)
+ var id = base.query("SELECT id FROM freezer", (err, res) => {
+    if (err) {
+      console.log(err.stack);
+ } else {
+    console.log(res.rows[0]);
+    }
+  });
+//  var id = 0
+  id++;
+  member.setNickname("user" + `${id}`);
+  base.query(`UPDATE freezer SET id = ${id}`, (err, res) => {
+    if (err) {
+      console.log(err.stack);
+    } else {
+      console.log(res.rows[0]);
+    }
+  });
+  //  let data = `{ "n": ${n} }`;
+  //  fs.writeFile("./f.json", data, (err) => {
+  //  if (err) console.log(err);
+  //  else console.log("nigger");
 });
+// child_process.exec('export n='+`${n}`+"")
+// keyv.set(n, n)
+// });
+base.connect(console.log("hello faggs"));
 client.login(process.env.token);
