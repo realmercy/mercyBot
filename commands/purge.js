@@ -10,7 +10,7 @@ module.exports = {
     const amount = interaction.options.getInteger("amount");
     if (amount <= 1 || amount > 100) {
       return interaction.reply({
-        content: "you need to provide a number between 1 and 100",
+        content: "provide the number of messages you want to purge dumbass",
         ephemeral: false,
       });
     }
@@ -22,9 +22,9 @@ module.exports = {
       });
     });
     await interaction.reply({
-      content: `<@${interaction.user.id}> purged **${amount}** messages`,
-      ephemeral: false,
+      content: `purged **${amount}** messages`,
+      ephemeral: true,
     });
-    await interaction.deleteReply();
+   // await interaction.deleteReply();
   },
 };
