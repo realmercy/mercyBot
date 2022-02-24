@@ -1,18 +1,19 @@
 const Discord = require("discord.js");
 const client = new Discord.Client({ intents: 4871 });
 const fs = require("fs");
-const jetpack = require("fs-jetpack");
 const { Client, Collection } = require("discord.js");
-const f = require("./f.json");
-const child_process = require("child_process");
+const redis = require("redis");
+const red = new redis.createClient({
+  url: process.env.url,
+});
+red.connect(console.log("ell"));
+
 ///HELP ME IM IN CONSTANT PAIN AND AGONY
 client.commands = new Discord.Collection();
 client.on("ready", () => {
   console.log("penis-balls-cum");
   client.user.setPresence({
-    activities: [
-      { name: "competitive sex championship", type: "COMPETING" },
-    ],
+    activities: [{ name: "competitive sex championship", type: "COMPETING" }],
   });
 });
 
@@ -57,19 +58,12 @@ client.on("interactionCreate", async (interaction) => {
 // client.on("channelPinsUpdate", async (message, webhook) => {
 
 // })
-client.on("guildMemberAdd", (member, client) => {
-  var n = f.n
-  n++
-  let data = `{ "n": ${n} }`
-  fs.writeFile("./f.json", data, function (err) {
-
-  if (err)
-   console.log(err)
-
-  console.log('Saved!');
-
-})
- member.setNickname("№" + `${n}`)
-   console.log(n)
+client.on("guildMemberAdd", async (member, client) => {
+  var n = await red.sendCommand(["GET", "key"]);
+  console.log(n);
+  n++;
+  member.setNickname("№" + `${n}`);
+  console.log(n);
+  await red.sendCommand(["INCR", "key"]);
 });
 client.login(process.env.token);
