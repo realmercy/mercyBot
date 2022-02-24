@@ -5,21 +5,13 @@ const jetpack = require("fs-jetpack");
 const { Client, Collection } = require("discord.js");
 const f = require("./f.json");
 const child_process = require("child_process");
-const pg = require("pg");
-const base = new pg.Client({
-  user: process.env.user,
-  host: process.env.host,
-  database: process.env.database,
-  password: process.env.password,
-  port: process.env.port,
-});
-
+///HELP ME IM IN CONSTANT PAIN AND AGONY
 client.commands = new Discord.Collection();
 client.on("ready", () => {
   console.log("penis-balls-cum");
   client.user.setPresence({
     activities: [
-      { name: "sex | competitive sex championship", type: "COMPETING" },
+      { name: "competitive sex championship", type: "COMPETING" },
     ],
   });
 });
@@ -66,30 +58,18 @@ client.on("interactionCreate", async (interaction) => {
 
 // })
 client.on("guildMemberAdd", (member, client) => {
- var id = base.query("SELECT id FROM freezer", (err, res) => {
-    if (err) {
-      console.log(err.stack);
- } else {
-    console.log(res.rows[0]);
-    }
-  });
-//  var id = 0
-  id++;
-  member.setNickname("user" + `${id}`);
-  base.query(`UPDATE freezer SET id = ${id}`, (err, res) => {
-    if (err) {
-      console.log(err.stack);
-    } else {
-      console.log(res.rows[0]);
-    }
-  });
-  //  let data = `{ "n": ${n} }`;
-  //  fs.writeFile("./f.json", data, (err) => {
-  //  if (err) console.log(err);
-  //  else console.log("nigger");
+  var n = f.n
+  n++
+  let data = `{ "n": ${n} }`
+  fs.writeFile("./f.json", data, function (err) {
+
+  if (err)
+   console.log(err)
+
+  console.log('Saved!');
+
+})
+ member.setNickname("№" + `${n}`)
+   console.log(n)
 });
-// child_process.exec('export n='+`${n}`+"")
-// keyv.set(n, n)
-// });
-base.connect(console.log("hello faggs"));
 client.login(process.env.token);

@@ -2,21 +2,22 @@
   "dependencies": {
     "@discordjs/builders": "^0.12.0",
     "@discordjs/rest": "^0.3.0",
+    "@faker-js/faker": "^5.5.3",
     "ascii-art-image": "^1.4.0",
     "canvas": "^2.9.0",
     "child_process": "^1.0.2",
     "discord-api-types": "^0.27.1",
     "discord.js": "^13.6.0",
+    "faker": "^6.6.6",
     "fs-jetpack": "^4.3.1",
     "graphicsmagick": "^0.0.1",
     "keyv": "^4.1.1",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.15",
+    "pg": "^8.7.3",
     "qrcode": "^1.5.0",
-    "sharp": "^0.30.1",
-    "faker": "^6.6.6",
-    "@faker-js/faker": "^5.5.3",
-    "pg": "^8.7.3"
+    "redis": "^4.0.4",
+    "sharp": "^0.30.1"
   },
   "scripts": {
     "test": "echo penis",
