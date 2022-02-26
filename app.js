@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const client = new Discord.Client({ intents: 4871 });
+const client = new Discord.Client({ intents: 32767 });
 const fs = require("fs");
 const { Client, Collection } = require("discord.js");
 const redis = require("redis");
@@ -55,15 +55,12 @@ client.on("interactionCreate", async (interaction) => {
     });
   }
 });
-// client.on("channelPinsUpdate", async (message, webhook) => {
-
-// })
 client.on("guildMemberAdd", async (member, client) => {
   var n = await red.sendCommand(["GET", "key"]);
   console.log(n);
   n++;
   member.setNickname("№" + `${n}`);
   console.log(n);
-  await red.sendCommand(["INCR", "key"]);
+ await red.sendCommand(["INCR", "key"]);
 });
 client.login(process.env.token);

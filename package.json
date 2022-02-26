@@ -3,18 +3,20 @@
     "@discordjs/builders": "^0.12.0",
     "@discordjs/rest": "^0.3.0",
     "@faker-js/faker": "^5.5.3",
-    "@keyv/redis": "^2.2.3",
     "ascii-art-image": "^1.4.0",
     "canvas": "^2.9.0",
     "discord-api-types": "^0.27.1",
     "discord.js": "^13.6.0",
+    "discord.js-search": "^1.0.1",
     "qrcode": "^1.5.0",
     "redis": "^4.0.4",
-    "sharp": "^0.30.1"
+    "sharp": "^0.30.1",
+    "random-memes": "^3.1.0",
+    "coinflip": "^1.0.0"
   },
   "scripts": {
     "test": "echo penis",
-    "start": "node catto.js"
+    "start": "node app.js"
   },
   "engines": {
     "node": "16.x"
