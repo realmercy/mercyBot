@@ -2,18 +2,18 @@ const Discord = require("discord.js");
 const client = new Discord.Client({ intents: 32767 });
 const fs = require("fs");
 const { Client, Collection } = require("discord.js");
-const redis = require("redis");
-const red = new redis.createClient({
-  url: process.env.url,
-});
-red.connect(console.log("ell"));
+//const redis = require("redis");
+//const red = new redis.createClient({
+//  url: process.env.url,
+//});
+//red.connect(console.log("ell"));
 
 ///HELP ME IM IN CONSTANT PAIN AND AGONY
 client.commands = new Discord.Collection();
 client.on("ready", () => {
   console.log("penis-balls-cum");
   client.user.setPresence({
-    activities: [{ name: "competitive sex championship", type: "COMPETING" }],
+    activities: [{ name: "LOLI HENTAI IN VC", type: "WATCHING" }],
   });
 });
 
@@ -24,6 +24,7 @@ const commandFiles = fs
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
   client.commands.set(command.data.name, command);
+  console.log(`${command.data.name} loaded`);
 }
 
 const eventFiles = fs
@@ -56,11 +57,12 @@ client.on("interactionCreate", async (interaction) => {
   }
 });
 client.on("guildMemberAdd", async (member, client) => {
-  var n = await red.sendCommand(["GET", "key"]);
-  console.log(n);
-  n++;
-  member.setNickname("№" + `${n}`);
-  console.log(n);
- await red.sendCommand(["INCR", "key"]);
+  // var n = await red.sendCommand(["GET", "key"]);
+  //  console.log(n);
+  //  n++;
+  //  member.setNickname("№" + `${n}`);
+  // console.log(n);
+  // await red.sendCommand(["INCR", "key"]);
 });
+
 client.login(process.env.token);

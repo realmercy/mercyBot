@@ -23,9 +23,11 @@ module.exports = {
         interaction.reply({
           content: `${x}`,
         });
-      } else console.log(x.user.id);
+      } else {
+        //console.log(x.user.id);
       //console.log(x);
       interaction.reply({ content: `could not find №${nick}` });
+        }
     });
   },
 };

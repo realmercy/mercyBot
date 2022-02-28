@@ -1,4 +1,6 @@
-const memeLib = require('nodejs-meme-generator');
+const { MessageAttachment } = require("discord.js");
+const axios = require("axios");
+var Jimp = require("jimp");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 module.exports = {
   data: new SlashCommandBuilder()
@@ -11,43 +13,77 @@ module.exports = {
         .setRequired(true)
     )
     .addStringOption((option) =>
-      option.setName("toptext").setDescription("top text of the caption")
+      option
+        .setName("toptext")
+        .setDescription("top text of the caption")
+        .setRequired(true)
     )
     .addStringOption((option) =>
-      option.setName("bottomtext").setDescription("bottom text for the caption")
+      option
+        .setName("bottomtext")
+        .setDescription("bottom text for the caption")
+        .setRequired(true)
     ),
   async execute(interaction) {
+    interaction.reply({ content: `pls wait this might take a while` });
     const url = interaction.options.getString("url");
-    const top = interaction.options.getString("top text");
-    const bottom = interaction.options.getString("bottom text");
-    const memeGenerator = new memeLib({
-      fontOptions: { // optional
-    fontSize: 46,
-    fontFamily: 'impact',
-    lineHeight: 2
-  }
-    })
-      memeGenerator.generateMeme({
+    const top = interaction.options.getString("toptext");
+    const bottom = interaction.options.getString("bottomtext");
 
-      // you can use either topText or bottomText
+    axios
 
-      // or both of them at the same time
+      .post(
+        "https://api.imgflip.com/caption_image",
 
-      topText: 'Meme',
+        {},
 
-      bottomText: 'Generator',
+        {
+          params: {
+            template_id: "374161761",
 
-      url: 'https://i.imgur.com/7FHoSIG.png'
+            username: process.env.username,
 
-    })
+            password: process.env.password,
 
-    .then(function(data) {
+            text0: `${top}`,
 
-     // res.set('Content-Type', 'image/png');
+            text1: `${bottom}`,
+          },
+        }
+      )
 
-      console.log(data);
+      .then((response) => {
+        //interaction.reply({content: `${response.data}`})
+        const img = response.data.data.url;
+        // interaction.reply({ content: `${img}` });
+        Jimp.read(`${url}`)
+          .then((image) => {
+            image.resize(512, 512);
 
-    })
-    interaction.reply({ content: "hello" });
+            Jimp.read(`${img}`, (err, file) => {
+              if (err) console.log(err);
+              else
+                file
+                  .resize(512, 512)
+                  .composite(image, 0, 0, {
+                    mode: Jimp.BLEND_SCREEN,
+                  })
+                  .getBuffer(Jimp.AUTO, (err, res) => {
+                    if (err) {
+                      interaction.reply(err);
+                    } else {
+                      const file = new MessageAttachment(res);
+                      interaction.followUp({ files: [file] });
+                    }
+                  });
+              //   console.log(file)
+              //      interaction.reply({files: [file]})
+            });
+          })
+          .catch((e) => {
+            // return console.log(e);
+            //  interaction.reply({content: `${e}`})
+          });
+      });
   },
 };

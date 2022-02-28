@@ -31,7 +31,7 @@ module.exports = {
         .setURL(
           `${interaction.user.displayAvatarURL({ dynamic: true, size: 4096 })}`
         );
-      return interaction.reply({ embeds: [embed] });
+      return interaction.reply({ embeds: [embed] })
     }
   },
 };
