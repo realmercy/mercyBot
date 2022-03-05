@@ -13,7 +13,7 @@ module.exports = {
     const text = interaction.options.getString('text')
     let image = await QRCODE.toBuffer(text)
     const file = new MessageAttachment(image, "qr.png")
-    return interaction.reply({ content: `${text} as a qrcode`, files: [file] })
+    return interaction.reply({ files: [file] })
       } else {
         interaction.reply({ content: "provide some text dumbass"})
       }

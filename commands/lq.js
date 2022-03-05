@@ -6,10 +6,9 @@ module.exports = {
     .setDescription("lq an user").addUserOption((option) => option.setName("user").setDescription("user to lq")),
   async execute(interaction) {
     const member = interaction.options.getMember("user")
-   // const role = interaction.options.getRole('947415733120413786')
   if (member) {
       if (interaction.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
-        member.roles.add('947415733120413786')
+        member.roles.add(process.env.lq)
         
        return interaction.reply({ content: `lqed ${member}`})
   } else {

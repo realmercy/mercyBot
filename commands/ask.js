@@ -19,13 +19,11 @@ module.exports = {
     })
       .then((res) => res.json())
       .then((data) =>
-        //console.log(data.message)
         interaction.reply({ content: `${data.message}` })
       )
       .catch((e) =>
-        //  console.error(e)
+
         interaction.reply({ content: `${e}` })
       );
-    //interaction.reply({ content: "hello" });
   },
 };

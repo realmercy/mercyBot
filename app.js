@@ -1,7 +1,11 @@
 const Discord = require("discord.js");
 const client = new Discord.Client({ intents: 32767 });
 const fs = require("fs");
-const { Client, Collection } = require("discord.js");
+const { Client, Collection, WebhookClient } = require("discord.js");
+const webhook = new Discord.WebhookClient({
+  id: process.env.id,
+  token: process.env.webtoken,
+});
 //const redis = require("redis");
 //const red = new redis.createClient({
 //  url: process.env.url,
@@ -11,9 +15,9 @@ const { Client, Collection } = require("discord.js");
 ///HELP ME IM IN CONSTANT PAIN AND AGONY
 client.commands = new Discord.Collection();
 client.on("ready", () => {
-  console.log("penis-balls-cum");
+  console.warn("penis-balls-cum");
   client.user.setPresence({
-    activities: [{ name: "LOLI HENTAI IN VC", type: "WATCHING" }],
+    activities: [{ name: "with pointers", type: "PLAYING" }],
   });
 });
 
@@ -63,6 +67,34 @@ client.on("guildMemberAdd", async (member, client) => {
   //  member.setNickname("№" + `${n}`);
   // console.log(n);
   // await red.sendCommand(["INCR", "key"]);
+});
+//FUCK YEAH FINNALY FIGURED OUT PINBOT LETS FUCKING GOOO 
+client.on("channelPinsUpdate", async (channel) => {
+  let PIN = channel.messages.fetchPinned().then((messages) => {
+    let message = messages.last();
+
+    if (message === undefined) return;
+    
+      webhook.edit({
+        name: message.member.nickname,
+        avatar: message.author.displayAvatarURL({
+          dynamic: false,
+          format: "png",
+        }),
+      }).then(webhook => {
+if (message.attachments.size === 0) {
+      webhook.send({ content: `${message.content}` })
+
+      return channel.messages.unpin(message.id)
+  }
+      else 
+      {
+            webhook.send({ content: `${message.content.toString()}` + "_  _", files: [...message.attachments.values()] })
+
+      return channel.messages.unpin(message.id)
+      }
+      })
+  });
 });
 
 client.login(process.env.token);

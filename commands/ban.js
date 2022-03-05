@@ -7,12 +7,13 @@ module.exports = {
     async execute(interaction) {
     const user = interaction.options.getUser("user")
     const ban = "https://cdn.glitch.global/479ccf91-6fd4-43fa-aa8b-6d7c0b85686a/ban.jpg?v=1645443091165"
+    const yotsuba = "https://cdn.glitch.global/d32c0241-4fa2-4c5a-b605-09c489fe096c/yotsuba-ban.png?v=1646119870054"
     const reason = interaction.options.getString("reason")
     const guild = interaction.guild
     if (user) {
       if (interaction.member.permissions.has(Permissions.FLAGS.BAN_MEMBERS)) {
         guild.members.ban(user, { days: 7, reason: `${reason}`})
-        interaction.reply({ content: `banned ${user.tag}(${user.id})`})
+        interaction.reply({ content: `banned ${user.tag}(${user.id})`, files: [yotsuba]})
   } else {
         interaction.reply({content:"you need the **BAN_MEMBERS** permission to run this command", files: [ban] })
       }
